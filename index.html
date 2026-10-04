@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07091b">
+<title>Our Little Universe 🌙</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff;background:#07091b}
+.universe{position:relative;width:100%;height:100%;overflow:hidden;background:radial-gradient(circle at 50% 45%,#292658 0,transparent 30%),linear-gradient(160deg,#050615,#0b0d2b 55%,#09071d)}
+.nebula{position:absolute;inset:-30%;filter:blur(50px);opacity:.35}.nebula:before,.nebula:after{content:"";position:absolute;border-radius:50%}.nebula:before{width:45%;height:35%;left:8%;top:15%;background:#6655b7}.nebula:after{width:38%;height:30%;right:5%;bottom:15%;background:#9b477d}
+.stars{position:absolute;inset:0;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.5px),radial-gradient(circle,#fff 0 1px,transparent 1.5px);background-size:97px 113px,157px 149px;background-position:12px 28px,48px 77px;opacity:.5}
+.content{position:relative;z-index:5;height:100%;display:grid;place-items:center;padding:22px}
+.card{width:min(430px,100%);min-height:600px;padding:35px 25px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-radius:32px;background:rgba(8,10,36,.57);border:1px solid #ffffff1f;box-shadow:0 30px 90px #0006;backdrop-filter:blur(12px)}
+.badge{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#bfc4ff;margin-bottom:18px}
+.moon{width:110px;height:110px;border-radius:50%;margin:5px 0 28px;background:linear-gradient(135deg,#fff,#d8d8ef);box-shadow:0 0 35px #eeeeb3b3,0 0 90px #9794ff47}
+h1{font-size:31px;line-height:1.15;margin:0 0 13px}p{font-size:16px;line-height:1.65;color:#c8c9dc;max-width:335px;margin:0 auto 25px}
+button{width:100%;border:0;border-radius:17px;padding:15px 20px;background:#fff;color:#17182c;font-weight:800;font-size:16px;cursor:pointer;transition:.2s;margin-top:8px}button:hover{transform:translateY(-2px)}.secondary,.close{background:#ffffff14;color:#eeeef8;box-shadow:none}
+.hidden{display:none!important}.progress{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:10;width:120px;height:4px;border-radius:10px;background:#ffffff1f;overflow:hidden}.progress span{display:block;width:0;height:100%;background:#fff;transition:.5s}
+#sky{position:absolute;inset:0;z-index:3;pointer-events:none}.star{position:absolute;width:35px;height:35px;border:0;background:transparent;color:#fff;font-size:21px;padding:0;pointer-events:auto;filter:drop-shadow(0 0 8px #fff);animation:twinkle 2.2s ease-in-out infinite}.star:nth-child(2n){animation-delay:.5s}.star:nth-child(3n){animation-delay:1s}
+@keyframes twinkle{50%{opacity:.35;transform:scale(.78)}}
+.reason,.final{position:fixed;z-index:20;inset:0;display:grid;place-items:center;padding:22px;background:#030410b8;backdrop-filter:blur(12px)}
+.reasonbox,.finalbox{width:min(400px,100%);padding:34px 25px;text-align:center;border-radius:28px;background:linear-gradient(145deg,#1f214bf5,#0f1031f5);border:1px solid #ffffff24;box-shadow:0 30px 80px #0008}
+.reasonbox .big{font-size:45px;margin-bottom:15px}.reasonbox h2{font-size:24px;margin:0 0 12px}.reasonbox p{margin-bottom:20px}.final{z-index:30}.finalbox{padding:40px 25px}.heart{font-size:65px;animation:pulse 1.5s infinite}@keyframes pulse{50%{transform:scale(1.12)}}
+.float{position:absolute;z-index:4;pointer-events:none;animation:floatUp 5s linear forwards}@keyframes floatUp{from{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+
+#starArea{width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:4px 0 8px}
+.star{position:relative;width:100%;height:52px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:rgba(255,255,255,.07);color:#fff;font-size:24px;padding:0;cursor:pointer;filter:drop-shadow(0 0 8px rgba(255,255,255,.5));animation:twinkle 2.2s ease-in-out infinite}
+.star:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+@media(max-width:360px){#starArea{gap:6px}.star{height:48px;font-size:21px}}
+
+.hint{font-size:12px;color:#8f91ad;margin-top:10px}
+@media(max-height:700px){.card{min-height:540px}.moon{width:85px;height:85px;margin-bottom:18px}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="universe"><div class="nebula"></div><div class="stars"></div><div class="progress"><span id="progress"></span></div><div id="sky"></div>
+<div class="content"><main class="card">
+<section id="intro"><div class="badge">A tiny universe for you</div><div class="moon"></div><h1>Hey you. 🌙</h1><p>I made a tiny universe for you.<br><br>Don't rush. Explore it.</p><button onclick="enterUniverse()">Enter ✨</button></section>
+<section id="explore" class="hidden"><div class="badge">Your little universe</div><div class="moon" style="width:78px;height:78px;margin-bottom:12px"></div><h1>Find the stars. ⭐</h1><p>Five little stars are waiting for you.<br>Tap each one — they have something to tell you.</p><div id="starArea"></div><div class="hint" id="count">0 / 5 discovered</div></section>
+<section id="complete" class="hidden"><div class="badge">You found them all</div><div style="font-size:65px;margin:15px 0">🌙</div><h1>You reached the moon.</h1><p>There was supposed to be a clever ending here...</p><button onclick="showFinal()">See the ending 🫶</button></section>
+</main></div></div>
+<div id="reason" class="reason hidden"><div class="reasonbox"><div class="big" id="reasonEmoji">⭐</div><h2 id="reasonTitle"></h2><p id="reasonText"></p><button class="close" onclick="closeReason()">Keep exploring ✨</button></div></div>
+<div id="final" class="final hidden"><div class="finalbox"><div class="heart">💗</div><div class="badge" style="margin-top:15px">You made it</div><h1>Okay, here's the truth.</h1><p>Somewhere between all our conversations,<br>you became someone I genuinely care about.<br><br>And honestly?<br>I'm just really happy you're in my life. ❤️</p><button onclick="stay()">Stay a little longer 🫶</button></div></div>
+<script>
+const reasons=[["⭐","Little thing #1","I like the way you make ordinary conversations feel less ordinary."],["✨","Little thing #2","Your smile has caused entirely unnecessary distractions. I'm blaming you for that. 😌"],["🌙","Little thing #3","There is something about talking to you that makes time disappear way too easily."],["💫","Little thing #4","You have this way of being completely yourself... and somehow that's one of my favourite things about you."],["💗","Little thing #5","Somewhere between all our conversations, you became someone I genuinely care about."]];
+let found=0,used=new Set();
+function enterUniverse(){intro.classList.add("hidden");explore.classList.remove("hidden");progress.style.width="10%";spawnStars()}
+function spawnStars(){
+  const area=document.getElementById("starArea");
+  area.innerHTML="";
+  for(let i=0;i<5;i++){
+    let s=document.createElement("button");
+    s.className="star";
+    s.type="button";
+    s.textContent="✦";
+    s.setAttribute("aria-label","Find star "+(i+1));
+    s.onclick=()=>discover(i,s);
+    area.appendChild(s);
+  }
+}
+function discover(i,el){if(used.has(i))return;used.add(i);found++;el.style.visibility="hidden";count.textContent=found+" / 5 discovered";progress.style.width=(found*16+10)+"%";reasonEmoji.textContent=reasons[i][0];reasonTitle.textContent=reasons[i][1];reasonText.textContent=reasons[i][2];reason.classList.remove("hidden")}
+function closeReason(){reason.classList.add("hidden");if(found===5){explore.classList.add("hidden");complete.classList.remove("hidden");progress.style.width="90%";document.querySelectorAll(".star").forEach(s=>s.remove())}}
+function showFinal(){final.classList.remove("hidden");progress.style.width="100%";hearts()}
+function stay(){final.classList.add("hidden");document.querySelector(".card").classList.add("hidden");for(let i=0;i<20;i++)setTimeout(spawnHeart,i*90)}
+function spawnHeart(){let x=document.createElement("div");x.className="float";x.textContent=["💗","✨","🌙","⭐","🫶"][Math.floor(Math.random()*5)];x.style.left=Math.random()*100+"%";x.style.bottom="-30px";x.style.fontSize=18+Math.random()*28+"px";document.querySelector(".universe").appendChild(x);setTimeout(()=>x.remove(),5200)}
+function hearts(){for(let i=0;i<24;i++)setTimeout(spawnHeart,i*100)}
+</script>
+</body>
+</html>
